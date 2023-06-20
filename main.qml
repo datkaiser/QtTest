@@ -7,6 +7,7 @@ import projectX.Page2 1.0
 
 Window {
     id: root
+    Text:"abc"
     visible: true
     width: 320
     height: 240
