@@ -98,7 +98,7 @@ Window {
                 id: page1Loader
             }
             onClicked: {
-                page1Loader.source = "page6.qml"
+                page1Loader.source = "page4.qml"
                 page1.visible = false
 
             }
