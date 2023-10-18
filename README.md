@@ -1,29 +1,44 @@
-#ifndef DATETIME_H
-#define DATETIME_H
-#include "Systems/Scene/scene.h"
-
-#include <QObject>
-
-class DateTime : public QObject, public CScene::Scene
+#include "datetime.h"
+#include "lobby1scene.h"
+#include "Systems/Scene/scenemanager.h"
+DateTime::DateTime(QObject *parent) : QObject(parent)
 {
-    Q_OBJECT
-private:
-    const QString CONTEXT_PRO = "datetime";
-    const QString UML_PATH = "VendorMachine/UIs/DateTime.qml";
-public:
-    explicit DateTime(QObject *parent = nullptr);
-    ~DateTime();
-signals:
 
+}
 
-    // Scene interface
-public:
-    QString GetContextPropertyName();
-    QString GetUMLPath();
-    void OnKeyDown(const int);
-    void OnSceneLoaded(CScene::SceneData *);
-    void OnSceneUnload();
-};
+DateTime::~DateTime()
+{
 
+}
 
-#endif // DATETIME_H
+QString DateTime::GetContextPropertyName()
+{
+    return CONTEXT_PRO;
+
+}
+
+QString DateTime::GetUMLPath()
+{
+    return UML_PATH;
+
+}
+
+void DateTime::OnKeyDown(const int key)
+{
+    if(key == Qt::Key_Backspace){
+        CScene::SceneManager::GetInstance()->LoadScene<Lobby1Scene>(nullptr);
+    }
+    if(key == Qt::Key_Return){
+        CScene::SceneManager::GetInstance()->LoadScene<Lobby1Scene>(nullptr);
+    }
+}
+
+void DateTime::OnSceneLoaded(CScene::SceneData *)
+{
+
+}
+
+void DateTime::OnSceneUnload()
+{
+
+}
