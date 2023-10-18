@@ -1,24 +1,81 @@
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC5mCI+lGm4V7HaGA3gA5wzt/FLp0USaHA62ORT62gyFcQeKMV7v+RkWyQmyvW5ZvXDsgESkoWWK8nsme7kVASXJc0orCOhKiB5DooWX73bbmo/XCcAnd+licMLxS7C96/QRj7txcSY6Ru0i0sJop8ipv1qV2MZq9SWE/r6vtcYbSUwTdQfibHe9X8kOzkst2XN7aVCF5BS9GMdG4zb2Kx4pJvKEV3K9guRrAwYI83iZLkYOH1m2cuI5AxuQ/SAz9v+QppVWJRUPmOZ6zbGry+iG+IhJ7vX6iuew3DkclAt6wbow2pWQ9HmcMaxdDiBGz7EmyuenxMdt8SoHgGA51lxUKNpyu2dALCmaXj5wocdU5vZZc+ApH4C32qkARkYD2qeH4SmapYh4fatbqFF2EUjvmfLHTtQUYLHuoWrgQxnlvD4aC5YkzK1vmvmXVHL/yqmT4rb2jHFUlCzzWuYnUZ6Ttps3WHEbBvulwd9gySEOzSIyDv/zVQiOW27fpa5UeU= gamercial@gamercial-HP-ProDesk-400-G2-MINI
-git@gitlab.com:PhamNhatTruong.dev/vendormachine.git
-Could not start process "make" -f /home/gamercial/Downloads/build-VendorMachine-Desktop_Qt_5_12_12_GCC_64bit-Debug/Makefile qmake_all.
-Error while building/deploying project VendorMachine (kit: Desktop Qt 5.12.12 GCC 64bit)
-When executing step "qmake"
-:-1: error: cannot find -lGL: No such file or directory
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtQuick.Window 2.2
+Item {
+    Rectangle {
+            width: parent.width
+            height: parent.height
+            color: "#1E392A"
 
-QML debugging is enabled. Only use this in a safe environment.
-Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway.
-Loaded config system in "/home/gamercial/.config/Gamercial/VendorMachine.conf"
-Is first time 1
-Start assign module
-Max thread count 10
-Main thread QThread(0x555d925aad00)
-start up "./openGP27-keypad.sh"
-mReadCommand "./interuptKeypadValue.sh"
-mExec "bash"
-bus "/dev/i2c-1"
-mAddress 60
-Bus  "/dev/i2c-1"
-mAddress 1  56
-mAddress 2  57
-mSub        58
-ERROR: PCF8574::setByte failed to open i2c bus at /dev/i2c-1
+            Row {
+                id: row1
+                anchors.verticalCenterOffset: -19
+                anchors.horizontalCenterOffset: 1
+                anchors.centerIn: parent // Canh giữa theo chiều ngang và dọc
+
+                Label {
+                    id: hourLabel
+                    font.pointSize:150
+                    color: "#FFFFFF"
+                    text: Qt.formatTime(new Date(), "hh")
+
+                }
+                Label {
+                    id: status
+                    font.pointSize:150
+                    color: "#FFFFFF"
+                    text: ":"
+                    PropertyAnimation
+                    {
+                        id: propertyAnimation
+                        target: status
+                        property: "opacity"
+                        from: 1
+                        to: 0
+                        duration:1000
+                        running: true
+                        loops: Animation.Infinite
+                     }
+
+                }
+                Label {
+                    id: minuteLabel
+                    font.pointSize:150
+                    color: "#FFFFFF"
+                    text: Qt.formatTime(new Date(), "mm")
+                }
+                Label {
+                    id: ssLabel
+                    font.pointSize:50
+                    color: "#FFFFFF"
+                    text: Qt.formatTime(new Date(), "ss")
+                }
+            }
+
+            Label {
+                id: label1
+                font.pointSize: 34
+                anchors.centerIn: parent.Center
+                anchors.horizontalCenterOffset: 0
+                anchors.topMargin: 16
+                color: "#FFFFFF"
+                text: Qt.formatDate(new Date(),"dd")+(" tháng ")+Qt.formatDate(new Date(),"MM")+(", ")+Qt.formatDate(new Date(),"yyyy")
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: row1.bottom
+
+            }
+            Timer {
+                        interval: 1000
+                        running: true
+                        repeat: true
+                        onTriggered: {
+                            ssLabel.text = Qt.formatTime(new Date(), "ss")
+                            hourLabel.text = Qt.formatTime(new Date(), "hh")
+                            minuteLabel.text =  Qt.formatTime(new Date(), "mm")
+                            label1.text = Qt.formatDate(new Date(),"dd")+(" tháng ")+Qt.formatDate(new Date(),"MM")+(", ")+Qt.formatDate(new Date(),"yyyy");
+                        }
+
+                    }
+
+        }
+}
