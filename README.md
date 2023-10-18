@@ -3,3 +3,4 @@ git@gitlab.com:PhamNhatTruong.dev/vendormachine.git
 Could not start process "make" -f /home/gamercial/Downloads/build-VendorMachine-Desktop_Qt_5_12_12_GCC_64bit-Debug/Makefile qmake_all.
 Error while building/deploying project VendorMachine (kit: Desktop Qt 5.12.12 GCC 64bit)
 When executing step "qmake"
+:-1: error: cannot find -lGL: No such file or directory
